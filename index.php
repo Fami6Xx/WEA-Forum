@@ -1,3 +1,79 @@
+<?php
+// Sample array of posts
+$posts = [
+    [
+        'title' => 'First Post',
+        'author' => 'John Doe',
+        'date' => '2023-04-27 12:30:00',
+        'num_comments' => 3,
+        'content' => 'This is the content of the first post.'
+    ],
+    [
+        'title' => 'Second Post',
+        'author' => 'Jane Doe',
+        'date' => '2023-04-26 15:45:00',
+        'num_comments' => 1,
+        'content' => 'This is the content of the second post.'
+    ],
+    [
+        'title' => 'Second Post',
+        'author' => 'Jane Doe',
+        'date' => '2023-04-26 15:45:00',
+        'num_comments' => 1,
+        'content' => 'This is the content of the second post.'
+    ],
+    [
+        'title' => 'Second Post',
+        'author' => 'Jane Doe',
+        'date' => '2023-04-26 15:45:00',
+        'num_comments' => 1,
+        'content' => 'This is the content of the second post.'
+    ],
+    [
+        'title' => 'Second Post',
+        'author' => 'Jane Doe',
+        'date' => '2023-04-26 15:45:00',
+        'num_comments' => 1,
+        'content' => 'This is the content of the second post.'
+    ],
+    [
+        'title' => 'Second Post',
+        'author' => 'Jane Doe',
+        'date' => '2023-04-26 15:45:00',
+        'num_comments' => 1,
+        'content' => 'This is the content of the second post.'
+    ],
+    [
+        'title' => 'Second Post',
+        'author' => 'Jane Doe',
+        'date' => '2023-04-26 15:45:00',
+        'num_comments' => 1,
+        'content' => 'This is the content of the second post.'
+    ],
+    [
+        'title' => 'Second Post',
+        'author' => 'Jane Doe',
+        'date' => '2023-04-26 15:45:00',
+        'num_comments' => 1,
+        'content' => 'This is the content of the second post.'
+    ],
+    [
+        'title' => 'Second Post',
+        'author' => 'Jane Doe',
+        'date' => '2023-04-26 15:45:00',
+        'num_comments' => 1,
+        'content' => 'This is the content of the second post.'
+    ],
+    [
+        'title' => 'Second Post',
+        'author' => 'Jane Doe',
+        'date' => '2023-04-26 15:45:00',
+        'num_comments' => 100,
+        'content' => 'This is the content of the second post.'
+    ]
+];
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,68 +87,43 @@
 <body>
 <?php include "navbar.php"; ?>
 
-<div class="container my-4">
-    <h2 class="text-center mb-4">Category 1</h2>
-    <div class="row justify-content-center">
-        <?php for ($i = 1; $i <= 3; $i++): ?>
-            <div class="col-md-6 col-lg-4 my-3">
-                <div class="card">
-                    <div class="card-header"><h5 class="card-title">Post Title <?= $i; ?></h5></div>
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">Author: Your mother</h6>
-                        <p class="card-subtitle mb-2 text-muted">Date: 4.20.0000</p>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consectetur delectus, dolorem harum iure maxime similique voluptatibus? Ad aliquid dolorem eius fugiat hic maiores maxime molestiae, natus, necessitatibus nesciunt nostrum, odio officiis omnis praesentium quisquam sunt veniam veritatis voluptas? Ea?</p>
-                        <a href="post_detail.php" class="card-link">Read More</a>
-                    </div>
-                    <div class="card-footer"><small>Last updated 3 mins ago</small></div>
+<div class="row justify-content-center m-5">
+    <?php foreach ($posts as $post): ?>
+        <div class="col-md-6 col-lg-4 my-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title"><?= htmlspecialchars($post['title']); ?></h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">Author: <?= htmlspecialchars($post['author']); ?></h6>
+                    <p class="card-subtitle mb-2 text-muted">Date: <?= htmlspecialchars($post['date']); ?></p>
+                    <p class="card-text"><?= htmlspecialchars($post['content']); ?></p>
+                    <a href="post_detail.php" class="card-link">Read More</a>
+                </div>
+                <div class="card-footer">
+                    <small><?= $post['num_comments']; ?> comments</small>
                 </div>
             </div>
-        <?php endfor; ?>
-    </div>
+        </div>
+    <?php endforeach; ?>
+</div>
 
-    <br/>
-    <hr/>
-    <br/>
+<br/>
+<hr>
+<br/>
 
-    <h2 class="text-center mb-4">Category 2</h2>
-    <div class="row justify-content-center">
-        <?php for ($i = 1; $i <= 3; $i++): ?>
-            <div class="col-md-6 col-lg-4 my-3">
-                <div class="card">
-                    <div class="card-header"><h5 class="card-title">Post Title <?= $i; ?></h5></div>
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">Author: Your mother</h6>
-                        <p class="card-subtitle mb-2 text-muted">Date: 4.20.0000</p>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consectetur delectus, dolorem harum iure maxime similique voluptatibus? Ad aliquid dolorem eius fugiat hic maiores maxime molestiae, natus, necessitatibus nesciunt nostrum, odio officiis omnis praesentium quisquam sunt veniam veritatis voluptas? Ea?</p>
-                        <a href="post_detail.php" class="card-link">Read More</a>
-                    </div>
-                    <div class="card-footer"><small>Last updated 3 mins ago</small></div>
-                </div>
-            </div>
-        <?php endfor; ?>
-    </div>
-
-    <br/>
-    <hr/>
-    <br/>
-
-    <h2 class="text-center mb-4">Category 3</h2>
-    <div class="row justify-content-center">
-        <?php for ($i = 1; $i <= 3; $i++): ?>
-            <div class="col-md-6 col-lg-4 my-3">
-                <div class="card">
-                    <div class="card-header"><h5 class="card-title">Post Title <?= $i; ?></h5></div>
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">Author: Your mother</h6>
-                        <p class="card-subtitle mb-2 text-muted">Date: 4.20.0000</p>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consectetur delectus, dolorem harum iure maxime similique voluptatibus? Ad aliquid dolorem eius fugiat hic maiores maxime molestiae, natus, necessitatibus nesciunt nostrum, odio officiis omnis praesentium quisquam sunt veniam veritatis voluptas? Ea?</p>
-                        <a href="post_detail.php" class="card-link">Read More</a>
-                    </div>
-                    <div class="card-footer"><small>Last updated 3 mins ago</small></div>
-                </div>
-            </div>
-        <?php endfor; ?>
-    </div>
+<div class="container my-4 w-25">
+    <form action="add_post.php" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">Nadpis</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Text</label>
+            <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Přidat příspěvek</button>
+    </form>
 </div>
 <script src="js/bootstrap.js"></script>
 </body>
