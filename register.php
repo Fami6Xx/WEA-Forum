@@ -6,21 +6,27 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/login.css">
-    <title>Login</title>
+    <title>Register</title>
 </head>
 <body>
 <div class="background">
 </div>
-<form>
-    <h3>Login</h3>
+<form style="height: 675px">
+    <h3>Register</h3>
 
     <label for="username">Username</label>
     <input type="text" placeholder="Your username" id="username">
 
+    <label for="email">Email</label>
+    <input type="text" placeholder="Email" id="email">
+
     <label for="password">Password</label>
     <input type="password" placeholder="Password" id="password">
 
-    <button>Log In</button>
+    <label for="passwordAgain">Password Again</label>
+    <input type="text" placeholder="Password Again" id="passwordAgain">
+
+    <button>Register</button>
 
 </form>
 </body>
