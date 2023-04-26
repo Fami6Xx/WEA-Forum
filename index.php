@@ -87,6 +87,24 @@ $posts = [
 <body>
 <?php include "navbar.php"; ?>
 
+<div class="container my-4 w-25">
+    <form action="add_post.php" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">Nadpis</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Text</label>
+            <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Přidat příspěvek</button>
+    </form>
+</div>
+
+<br/>
+<hr>
+<br/>
+
 <div class="row justify-content-center m-5">
     <?php foreach ($posts as $post): ?>
         <div class="col-md-6 col-lg-4 my-3">
@@ -108,23 +126,7 @@ $posts = [
     <?php endforeach; ?>
 </div>
 
-<br/>
-<hr>
-<br/>
 
-<div class="container my-4 w-25">
-    <form action="add_post.php" method="post">
-        <div class="mb-3">
-            <label for="title" class="form-label">Nadpis</label>
-            <input type="text" class="form-control" id="title" name="title" required>
-        </div>
-        <div class="mb-3">
-            <label for="content" class="form-label">Text</label>
-            <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Přidat příspěvek</button>
-    </form>
-</div>
 <script src="js/bootstrap.js"></script>
 </body>
 </html>
