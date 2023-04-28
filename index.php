@@ -52,15 +52,6 @@ foreach ($rows as $key => $value) {
 <body>
 <?php include "navbar.php"; ?>
 <div class="container my-4 w-25">
-    <form class="mb-3" method="get">
-        <label for="sort_method" class="form-label">Sort by:</label>
-        <select name="sort_method" id="sort_method" class="form-select" onchange="this.form.submit()">
-            <option value="date" <?= $sort_method === 'date' ? 'selected' : ''; ?>>Date</option>
-            <option value="title" <?= $sort_method === 'title' ? 'selected' : ''; ?>>Title</option>
-            <option value="num_comments" <?= $sort_method === 'num_comments' ? 'selected' : ''; ?>>Number of Comments</option>
-        </select>
-    </form>
-
     <form action="add_post.php" method="post">
         <div class="mb-3">
             <label for="title" class="form-label">Nadpis</label>
@@ -77,6 +68,17 @@ foreach ($rows as $key => $value) {
 <br/>
 <hr>
 <br/>
+
+<div class="container my-4 w-25">
+    <form class="mb-3" method="get">
+        <label for="sort_method" class="form-label">Sort by:</label>
+        <select name="sort_method" id="sort_method" class="form-select" onchange="this.form.submit()">
+            <option value="date" <?= $sort_method === 'date' ? 'selected' : ''; ?>>Date</option>
+            <option value="title" <?= $sort_method === 'title' ? 'selected' : ''; ?>>Title</option>
+            <option value="num_comments" <?= $sort_method === 'num_comments' ? 'selected' : ''; ?>>Number of Comments</option>
+        </select>
+    </form>
+</div>
 
 <div class="row justify-content-center m-5">
     <?php foreach ($posts as $post): ?>
