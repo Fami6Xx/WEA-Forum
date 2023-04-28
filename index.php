@@ -62,8 +62,12 @@ foreach ($rows as $key => $value) {
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title"><?= htmlspecialchars($post['title']); ?> 
-                    <?php if($_SESSION && $_SESSION['loggedin'] && $_SESSION['accountdetails']['group'] == 'admin') {?>
-                        <a href="remove_post.php?id=<?php echo $post['id']; ?>" style="color: red;">REMOVE POST</a>
+                        <?php if(
+                            ($_SESSION && $_SESSION['loggedin'] && $_SESSION['accountdetails']['group'] == 'admin')
+                            ||
+                            ($_SESSION && $_SESSION["loggedin"] && $_SESSION["accountdetails"]["username"] == htmlspecialchars($post["author"])))
+                        {?>
+                            <a href="remove_post.php?id=<?php echo $post['id']; ?>&author=<?php echo $post["author"]?>" style="color: red;">REMOVE POST</a>
                         <?php }?>
                     </h5>
                 </div>
