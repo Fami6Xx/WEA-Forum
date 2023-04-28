@@ -20,18 +20,27 @@
     <div class="row vh-100 align-items-center">
         <div class="col">
             <h1 class="text-center mb-4">Zapomenuté heslo</h1>
-            <form class="forgot-password-form" action="reset_password.php" method="post">
+            <form class="forgot-password-form" action="new_password.php" method="post">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <div class="mb-3">
                     <label for="security_question" class="form-label">Kontrolní otázka</label>
-                    <input type="text" class="form-control" id="security_question" name="security_question" required>
+                    <select class="form-control" name="security_question" id="security_question" required>
+                        <option value="Kolik má pes nohou ?">Kolik má pes nohou ?</option>
+                        <option value="Jak se jmenovala vaše babička ?">Jak se jmenovala vaše babička ?</option>
+                        <option value="Jak se jmenoval váš první domácí mazlíček ?">Jak se jmenoval váš první domácí mazlíček ?</option>
+                        <option value="Váš nejoblíbenější film?">Váš nejoblíbenější film?</option>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="security_answer" class="form-label">Odpověď na kontrolní otázku</label>
                     <input type="text" class="form-control" id="security_answer" name="security_answer" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">New password</label>
+                    <input type="text" class="form-control" id="password" name="password" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Odeslat</button>
             </form>

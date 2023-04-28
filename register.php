@@ -55,7 +55,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="security_question" class="form-label">Kontrolní otázka *</label>
-                    <input type="text" class="form-control" id="security_question" name="security_question" required>
+                    <select class="form-control" name="security_question" id="security_question" required>
+                        <option value="Kolik má pes nohou ?">Kolik má pes nohou ?</option>
+                        <option value="Jak se jmenovala vaše babička ?">Jak se jmenovala vaše babička ?</option>
+                        <option value="Jak se jmenoval váš první domácí mazlíček ?">Jak se jmenoval váš první domácí mazlíček ?</option>
+                        <option value="Váš nejoblíbenější film?">Váš nejoblíbenější film?</option>
+                    </select>
                     <div class="invalid-feedback">Zadejte prosím kontrolní otázku.</div>
                 </div>
                 <div class="mb-3">

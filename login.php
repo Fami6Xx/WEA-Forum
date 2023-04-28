@@ -1,20 +1,25 @@
 <?php
+    $badRequests = 0;
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         require_once("config.php");
         $sql = "SELECT * FROM users WHERE username='".$_POST['username']."'";
         // Execute the query
         $result = $conn->query($sql);
         $rows = $result->fetch_assoc();
-        var_dump($rows);
         // var_dump($result);
-        if($result) {
+        if($rows) {
             session_start();
-            if(password_verify($_POST['password'], $rows['password'])){
-                $_SESSION['accountdetails'] = $rows;
-                $_SESSION['loggedin'] = true;
-                header("Location: index.php");
+            if($_POST['password']){
+                var_dump($_POST['password']);
+                if(password_verify($_POST['password'], $rows['password'])){
+                    $_SESSION['accountdetails'] = $rows;
+                    $_SESSION['loggedin'] = true;
+                    header("Location: index.php");
+                } else {
+                    $badRequests = $badRequests + 1;
+                }
             } else {
-                header("Location: login.php");
+                $badRequests = $badRequests + 1;
             }
         }
     }
@@ -42,9 +47,15 @@
     <input type="password" placeholder="Password" id="password" name="password">
 
     <button type="submit">Log In</button>
+    <?php
+    if($badRequests >= 1){
+    ?>
     <div class="text-center mt-3">
         <a href="forgot_password.php">Zapomenuté heslo</a>
     </div>
+    <?php
+    }
+    ?>
 </form>
 </body>
 </html>
