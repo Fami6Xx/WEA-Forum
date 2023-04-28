@@ -27,7 +27,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="security_question" class="form-label">Kontrolní otázka</label>
-                    <input type="text" class="form-control" id="security_question" name="security_question" required readonly>
+                    <input type="text" class="form-control" id="security_question" name="security_question" required>
                 </div>
                 <div class="mb-3">
                     <label for="security_answer" class="form-label">Odpověď na kontrolní otázku</label>

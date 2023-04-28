@@ -1,23 +1,39 @@
 <?php
+
+require_once("config.php");
+$sql = "SELECT * FROM posts WHERE id = ".$_GET['id']."";
+
+$result = $conn->query($sql);
+$rows = $result->fetch_assoc();
+
+$sqlo = "SELECT * FROM comments WHERE post_id = ".$_GET['id']."";
+
+$resulto = $conn->query($sqlo);
+$rowso = array();
+while ($row = $resulto->fetch_assoc()) {
+    $rowso[] = $row;
+}
+
 $post = [
-    'title' => 'First Post',
-    'author' => 'John Doe',
-    'date' => '2023-04-27 12:30:00',
-    'content' => 'This is the content of the first post.',
+    'title' => $rows['title'],
+    'author' => $rows['author'],
+    'date' => $rows['date'],
+    'content' => $rows['content'],
 ];
 
-$comments = [
-    [
-        'author' => 'Jane Doe',
-        'content' => 'This is a comment.',
-        'date' => '2023-04-27 13:15:00',
-    ],
-    [
-        'author' => 'Neregistrovaný uživatel',
-        'content' => 'This is another comment.',
-        'date' => '2023-04-27 14:30:00',
-    ]
-];
+$comments = [];
+
+if($rowso) {
+    foreach ($rowso as $key => $value) {
+        $newComment = [
+            'author' => $value['author'],
+            'content' => $value['content'],
+            'date' => $value['date']
+        ];
+        array_push($comments, $newComment);
+    }
+}
+
 ?>
 
 <!doctype html>
@@ -48,6 +64,7 @@ $comments = [
             <label for="content" class="form-label">Přidat komentář</label>
             <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
         </div>
+        <input type="hidden" id="postId" name="postId" value="<?php echo $_GET['id']; ?>" />
         <button type="submit" class="btn btn-primary">Odeslat</button>
     </form>
 

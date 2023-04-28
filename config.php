@@ -12,6 +12,6 @@ if ($conn->connect_error) {
 }
 
 // Start session management
-session_start();
+// session_start();
 
 ?>

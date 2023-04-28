@@ -1,17 +1,20 @@
 <?php
-    if($_GET){
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
         require_once("config.php");
-        $sql = "SELECT * FROM users WHERE username='".$_GET['username']."'";
+        $sql = "SELECT * FROM users WHERE username='".$_POST['username']."'";
         // Execute the query
         $result = $conn->query($sql);
-        $result = $result->fetch_assoc();
+        $rows = $result->fetch_assoc();
+        var_dump($rows);
         // var_dump($result);
         if($result) {
-            // var_dump();
-            // var_dump($result['password']);
-            // var_dump($_GET['password']);
-            if(password_verify($result['password'], $_GET['password'])){
-                echo "loggedin";
+            session_start();
+            if(password_verify($_POST['password'], $rows['password'])){
+                $_SESSION['accountdetails'] = $rows;
+                $_SESSION['loggedin'] = true;
+                header("Location: index.php");
+            } else {
+                header("Location: login.php");
             }
         }
     }
@@ -30,21 +33,18 @@
 <body>
 <div class="background">
 </div>
-<form>
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
     <h3>Login</h3>
-    <form action="" method="post">
-        <label for="username">Username</label>
-        <input type="text" placeholder="Your username" id="username" name="username">
+    <label for="username">Username</label>
+    <input type="text" placeholder="Your username" id="username" name="username">
 
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password" name="password">
+    <label for="password">Password</label>
+    <input type="password" placeholder="Password" id="password" name="password">
 
-        <button type="submit">Log In</button>
-        <div class="text-center mt-3">
-            <a href="forgot_password.php">Zapomenuté heslo</a>
-        </div>
-    </form>
-
+    <button type="submit">Log In</button>
+    <div class="text-center mt-3">
+        <a href="forgot_password.php">Zapomenuté heslo</a>
+    </div>
 </form>
 </body>
 </html>

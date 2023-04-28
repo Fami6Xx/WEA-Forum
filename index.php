@@ -1,77 +1,28 @@
 <?php
 // Sample array of posts
-$posts = [
-    [
-        'title' => 'First Post',
-        'author' => 'John Doe',
-        'date' => '2023-04-27 12:30:00',
-        'num_comments' => 3,
-        'content' => 'This is the content of the first post.'
-    ],
-    [
-        'title' => 'Second Post',
-        'author' => 'Jane Doe',
-        'date' => '2023-04-26 15:45:00',
-        'num_comments' => 1,
-        'content' => 'This is the content of the second post.'
-    ],
-    [
-        'title' => 'Second Post',
-        'author' => 'Jane Doe',
-        'date' => '2023-04-26 15:45:00',
-        'num_comments' => 1,
-        'content' => 'This is the content of the second post.'
-    ],
-    [
-        'title' => 'Second Post',
-        'author' => 'Jane Doe',
-        'date' => '2023-04-26 15:45:00',
-        'num_comments' => 1,
-        'content' => 'This is the content of the second post.'
-    ],
-    [
-        'title' => 'Second Post',
-        'author' => 'Jane Doe',
-        'date' => '2023-04-26 15:45:00',
-        'num_comments' => 1,
-        'content' => 'This is the content of the second post.'
-    ],
-    [
-        'title' => 'Second Post',
-        'author' => 'Jane Doe',
-        'date' => '2023-04-26 15:45:00',
-        'num_comments' => 1,
-        'content' => 'This is the content of the second post.'
-    ],
-    [
-        'title' => 'Second Post',
-        'author' => 'Jane Doe',
-        'date' => '2023-04-26 15:45:00',
-        'num_comments' => 1,
-        'content' => 'This is the content of the second post.'
-    ],
-    [
-        'title' => 'Second Post',
-        'author' => 'Jane Doe',
-        'date' => '2023-04-26 15:45:00',
-        'num_comments' => 1,
-        'content' => 'This is the content of the second post.'
-    ],
-    [
-        'title' => 'Second Post',
-        'author' => 'Jane Doe',
-        'date' => '2023-04-26 15:45:00',
-        'num_comments' => 1,
-        'content' => 'This is the content of the second post.'
-    ],
-    [
-        'title' => 'Second Post',
-        'author' => 'Jane Doe',
-        'date' => '2023-04-26 15:45:00',
-        'num_comments' => 100,
-        'content' => 'This is the content of the second post.'
-    ]
-];
+
+require_once("config.php");
+$sql = "SELECT * FROM posts";
+
+$result = $conn->query($sql);
+$rows = array();
+while ($row = $result->fetch_assoc()) {
+    $rows[] = $row;
+}
+
+$posts = [];
+foreach ($rows as $key => $value) {
+    $newPost = [
+        'id' => $value['id'],
+        'title' => $value['title'],
+        'author' => $value['author'],
+        'date' => $value['date'],
+        'num_comments' => $value['num_comments'],
+        'content' => $value['content']
+    ];
+    array_push($posts, $newPost);
+}
+
 ?>
 
 <!doctype html>
@@ -86,8 +37,11 @@ $posts = [
 </head>
 <body>
 <?php include "navbar.php"; ?>
-
-<div class="container my-4 w-25">
+<?php
+session_start();
+if($_SESSION && $_SESSION['loggedin']){
+?>
+    <div class="container my-4 w-25">
     <form action="add_post.php" method="post">
         <div class="mb-3">
             <label for="title" class="form-label">Nadpis</label>
@@ -100,6 +54,9 @@ $posts = [
         <button type="submit" class="btn btn-primary">Přidat příspěvek</button>
     </form>
 </div>
+<?php
+}
+?>
 
 <br/>
 <hr>
@@ -116,7 +73,7 @@ $posts = [
                     <h6 class="card-subtitle mb-2 text-muted">Author: <?= htmlspecialchars($post['author']); ?></h6>
                     <p class="card-subtitle mb-2 text-muted">Date: <?= htmlspecialchars($post['date']); ?></p>
                     <p class="card-text"><?= htmlspecialchars($post['content']); ?></p>
-                    <a href="post_detail.php" class="card-link">Read More</a>
+                    <a href="post_detail.php?id=<?php echo $post['id'];?>" class="card-link">Read More</a>
                 </div>
                 <div class="card-footer">
                     <small><?= $post['num_comments']; ?> comments</small>
