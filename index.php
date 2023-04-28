@@ -2,6 +2,7 @@
 // Sample array of posts
 
 require_once("config.php");
+session_start();
 $sql = "SELECT * FROM posts";
 
 $result = $conn->query($sql);
@@ -37,11 +38,7 @@ foreach ($rows as $key => $value) {
 </head>
 <body>
 <?php include "navbar.php"; ?>
-<?php
-session_start();
-if($_SESSION && $_SESSION['loggedin']){
-?>
-    <div class="container my-4 w-25">
+<div class="container my-4 w-25">
     <form action="add_post.php" method="post">
         <div class="mb-3">
             <label for="title" class="form-label">Nadpis</label>
@@ -54,9 +51,6 @@ if($_SESSION && $_SESSION['loggedin']){
         <button type="submit" class="btn btn-primary">Přidat příspěvek</button>
     </form>
 </div>
-<?php
-}
-?>
 
 <br/>
 <hr>
