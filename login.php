@@ -1,3 +1,21 @@
+<?php
+    var_dump($_POST);
+    if($_GET){
+        require_once("config.php");
+        $sql = "SELECT * FROM users WHERE username='".$_GET['username']."'";
+        // Execute the query
+        $result = $conn->query($sql);
+        $result = $result->fetch_assoc();
+        if($result) {
+            var_dump(password_verify($result['password'], $_GET['password']));
+            var_dump($result['password']);
+            var_dump($_GET['password']);
+            if(password_verify($result['password'], $_GET['password'])){
+                echo "loggedin";
+            }
+        }
+    }
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,18 +32,19 @@
 </div>
 <form>
     <h3>Login</h3>
+    <form action="" method="post">
+        <label for="username">Username</label>
+        <input type="text" placeholder="Your username" id="username" name="username">
 
-    <label for="username">Username</label>
-    <input type="text" placeholder="Your username" id="username">
+        <label for="password">Password</label>
+        <input type="password" placeholder="Password" id="password" name="password">
 
-    <label for="password">Password</label>
-    <input type="password" placeholder="Password" id="password">
+        <button type="submit">Log In</button>
+        <div class="text-center mt-3">
+            <a href="forgot_password.php">Zapomenuté heslo</a>
+        </div>
+    </form>
 
-    <button>Log In</button>
-
-    <div class="text-center mt-3">
-        <a href="forgot_password.php">Zapomenuté heslo</a>
-    </div>
 </form>
 </body>
 </html>
