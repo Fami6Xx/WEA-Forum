@@ -67,7 +67,11 @@ if($_SESSION && $_SESSION['loggedin']){
         <div class="col-md-6 col-lg-4 my-3">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title"><?= htmlspecialchars($post['title']); ?> <a href="remove_post.php?id=<?php echo $post['id']; ?>" style="color: red;">REMOVE POST</a></h5>
+                    <h5 class="card-title"><?= htmlspecialchars($post['title']); ?> 
+                    <?php if($_SESSION && $_SESSION['loggedin'] && $_SESSION['accountdetails']['group'] == 'admin') {?>
+                        <a href="remove_post.php?id=<?php echo $post['id']; ?>" style="color: red;">REMOVE POST</a>
+                        <?php }?>
+                    </h5>
                 </div>
                 <div class="card-body">
                     <h6 class="card-subtitle mb-2 text-muted">Author: <?= htmlspecialchars($post['author']); ?></h6>
