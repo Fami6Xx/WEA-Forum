@@ -3,7 +3,20 @@
 
 require_once("config.php");
 session_start();
-$sql = "SELECT * FROM posts";
+
+$sort_method = isset($_GET['sort_method']) ? $_GET['sort_method'] : 'date';
+
+switch ($sort_method) {
+    case 'title':
+        $sql = "SELECT * FROM posts ORDER BY title COLLATE utf8mb4_unicode_ci";
+        break;
+    case 'num_comments':
+        $sql = "SELECT * FROM posts ORDER BY num_comments DESC";
+        break;
+    default:
+        $sql = "SELECT * FROM posts ORDER BY date DESC";
+        break;
+}
 
 $result = $conn->query($sql);
 $rows = array();
@@ -39,6 +52,15 @@ foreach ($rows as $key => $value) {
 <body>
 <?php include "navbar.php"; ?>
 <div class="container my-4 w-25">
+    <form class="mb-3" method="get">
+        <label for="sort_method" class="form-label">Sort by:</label>
+        <select name="sort_method" id="sort_method" class="form-select" onchange="this.form.submit()">
+            <option value="date" <?= $sort_method === 'date' ? 'selected' : ''; ?>>Date</option>
+            <option value="title" <?= $sort_method === 'title' ? 'selected' : ''; ?>>Title</option>
+            <option value="num_comments" <?= $sort_method === 'num_comments' ? 'selected' : ''; ?>>Number of Comments</option>
+        </select>
+    </form>
+
     <form action="add_post.php" method="post">
         <div class="mb-3">
             <label for="title" class="form-label">Nadpis</label>
