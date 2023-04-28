@@ -11,4 +11,5 @@
     $securityanswer = $_POST['security_answer'];
     $stmt->bind_param("sssssss", $name, $surname, $username, $password, $email, $security, $securityanswer);
     $stmt->execute();
+    header("Location: login.php");
 ?>
