@@ -23,6 +23,8 @@ $post = [
 
 $comments = [];
 
+session_start();
+
 if($rowso) {
     foreach ($rowso as $key => $value) {
         $newComment = [
@@ -79,7 +81,7 @@ if($rowso) {
                 <p class="card-text"><?= htmlspecialchars($comment['content']); ?></p>
             </div>
             <div class="card-footer">
-                <small><?= htmlspecialchars($comment['date']); ?> <a href="remove_comment.php?id=<?php echo $comment['id']; ?>" style="color: red;">REMOVE COMMENT</a></small>
+                <small><?= htmlspecialchars($comment['date']); ?> <?php if($_SESSION && $_SESSION['loggedin'] && $_SESSION['group'] == 'admin') {?><a href="remove_comment.php?id=<?php echo $comment['id']; ?>" style="color: red;">REMOVE COMMENT</a><?php }?></small>
             </div>
         </div>
     <?php endforeach; ?>
