@@ -1,15 +1,15 @@
 <?php
-    var_dump($_POST);
     if($_GET){
         require_once("config.php");
         $sql = "SELECT * FROM users WHERE username='".$_GET['username']."'";
         // Execute the query
         $result = $conn->query($sql);
         $result = $result->fetch_assoc();
+        // var_dump($result);
         if($result) {
-            var_dump(password_verify($result['password'], $_GET['password']));
-            var_dump($result['password']);
-            var_dump($_GET['password']);
+            // var_dump();
+            // var_dump($result['password']);
+            // var_dump($_GET['password']);
             if(password_verify($result['password'], $_GET['password'])){
                 echo "loggedin";
             }
