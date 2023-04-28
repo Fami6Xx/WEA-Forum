@@ -26,6 +26,7 @@ $comments = [];
 if($rowso) {
     foreach ($rowso as $key => $value) {
         $newComment = [
+            'id' => $value['id'],
             'author' => $value['author'],
             'content' => $value['content'],
             'date' => $value['date']
@@ -78,7 +79,7 @@ if($rowso) {
                 <p class="card-text"><?= htmlspecialchars($comment['content']); ?></p>
             </div>
             <div class="card-footer">
-                <small><?= htmlspecialchars($comment['date']); ?></small>
+                <small><?= htmlspecialchars($comment['date']); ?> <a href="remove_comment.php?id=<?php echo $comment['id']; ?>" style="color: red;">REMOVE COMMENT</a></small>
             </div>
         </div>
     <?php endforeach; ?>
