@@ -8,7 +8,7 @@
     $date = date("Y-m-d H:i:s");
     $author = "Neregistrovaný uživatel";
     if($_SESSION) {
-        $author = "".$_SESSION['accountdetails']['firstname']." ".$_SESSION['accountdetails']['lastname']."";
+        $author = "".$_SESSION['accountdetails']['username'];
     }
     $stmt->bind_param("ssss", $post_id, $author, $content, $date);
     $stmt->execute();
